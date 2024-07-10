@@ -3,7 +3,6 @@ const itemSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxLength: 31
     },
     brand: {
         type: String,
