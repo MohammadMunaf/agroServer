@@ -12,8 +12,6 @@ const { v4: uuidv4 } = require("uuid");
 uuidv4();
 app.use(cors({
     origin: ['https://agroclient-nine.vercel.app', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PATCH'], // Allow the methods you need
-    allowedHeaders: ['Content-Type'],
 }));
 
 const bodyParser = require('body-parser');
@@ -80,9 +78,10 @@ app.get('/edit/:id', async (req, res) => {
 
 app.patch('/edit/:id', async (req, res) => {
     const Id = req.params.id;
-    const { Name, Description, price, category } = req.body;
+    const { Name, Description, price, category,images} = req.body;
     try {
         const oldProduct = await items.findById(Id);
+        await items.updateOne({_id:Id},{images:images});
         if (oldProduct.Name !== Name) {
             await items.updateOne({ _id: Id }, { name: Name })
 
@@ -98,6 +97,7 @@ app.patch('/edit/:id', async (req, res) => {
             await items.updateOne({ _id: Id }, { $set: { category: category } });
         }
         const newProduct = await items.findById(Id);
+        //console.log(newProduct);
         res.json(newProduct)
     } catch (e) {
         console.log(`Error-->${e}`);
