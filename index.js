@@ -11,7 +11,7 @@ const items = require("./models/item");
 const { v4: uuidv4 } = require("uuid");
 uuidv4();
 app.use(cors({
-    origin: ['https://agroclient-nine.vercel.app', 'http://localhost:3000'],
+    origin: ['https://agroclient-nine.vercel.app', 'http://localhost:3000',"https://agroclient-munafs-projects-7c7651d4.vercel.app","https://agroclient-git-main-munafs-projects-7c7651d4.vercel.app"],
 }));
 
 const bodyParser = require('body-parser');
